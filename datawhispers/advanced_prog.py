@@ -129,24 +129,31 @@ def show_mnist_from_array(arr):
     Returns the image of the mnist number and saves it as mnist_num.png
     arr: array of shape (784,) or (28,28)
     """
+    label = ''
+    if arr.shape == (785,): label,arr = arr[0],arr[1:].reshape((28, 28))
     if arr.shape == (784,):   
         arr = arr.reshape((28, 28))
     # Plot
+    plt.title(f"MNIST Number {label}")
     plt.imshow(arr, cmap='gray')
-    plt.savefig("mnist_num.png")
+    plt.savefig("mnist_num.png", dpi=1200)
     plt.show()
     
 
 def show_mnist_from_file(filepath):    
     with open(filepath) as f: 
         try:
+            label = ""
             for i in f:
                 if "," in i:   
                     arr = np.array([int(num) for num in i.split(",")])
+                    if arr.shape == (785,): label,arr = arr[0],arr[1:].reshape((28, 28))
                     if arr.shape == (784,): arr = arr.reshape((28, 28))
                 else:    
                     arr = np.array([int(num) for num in i.split(";")])
+                    if arr.shape == (785,): label,arr = arr[0],arr[1:].reshape((28, 28))
                     if arr.shape == (784,): arr = arr.reshape((28, 28))
+                plt.title(f"MNIST Number {label}")    
                 plt.imshow(arr, cmap="gray")
                 plt.show()   
         except Exception as e:
