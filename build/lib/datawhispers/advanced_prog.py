@@ -107,7 +107,7 @@ def PolyCoefficients(x, coeffs):
         y += coeffs[i]*x**i
     return y
 
-def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["lightblue", "black"]):
+def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["lightblue", "black"], name="fig_reg.png"):
     '''
     Outputs a graph for (x and y) and (x and y_reg) and saves it as fig_reg.png
     x: array with x-values
@@ -120,7 +120,7 @@ def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["l
     plt.ylabel(ylabel)
     if xticks: plt.xticks(xticks);
     if yticks: plt.yticks(yticks);
-    plt.savefig("fig_reg.png");    
+    plt.savefig(f"{name}");  
     plt.show()
 
 
@@ -133,10 +133,25 @@ def show_mnist_from_array(arr):
         arr = arr.reshape((28, 28))
     # Plot
     plt.imshow(arr, cmap='gray')
-    plt.show()
     plt.savefig("mnist_num.png")
+    plt.show()
     
-    
+
+def show_mnist_from_file(filepath):    
+    with open(filepath) as f: 
+        try:
+            for i in f:
+                if "," in i:   
+                    arr = np.array([int(num) for num in i.split(",")])
+                    if arr.shape == (784,): arr = arr.reshape((28, 28))
+                else:    
+                    arr = np.array([int(num) for num in i.split(";")])
+                    if arr.shape == (784,): arr = arr.reshape((28, 28))
+                plt.imshow(arr, cmap="gray")
+                plt.show()   
+        except Exception as e:
+            print("Sorry try the func 'show_mnist_from_array' because your file does not seem to work with this method")         
+
 
 def add_mnist_num_arrays(num1,num2):
     """
@@ -214,4 +229,36 @@ class Trend:
         '''Computes the coefficient of determination for the training input
         ''' 
         wert=r2(self.y, self.pred(self.x))
-        return round(wert, 3)        
+        return round(wert, 4)        
+    
+    
+def plot_all_regs(x,y, xticks=None, yticks=None):
+    model = Trend(x,y,"linReg")
+    plt.title("Linear Regression");
+    y_reg = model.pred(x)
+    make_plot(x,y,y_reg, name="lin_reg_plot.png");
+    print(f"Coefs: {model.coef}, r2: {model.r2}")
+    
+    for i in range(2,10):
+        model = Trend(x,y,"polReg", deg=i)
+        plt.title(f"Polynomial Regression {i} degree");
+        y_reg = model.pred(x)
+        make_plot(x,y,y_reg, name=f"pol_reg{i}.png");
+        print(f"Coefs: {model.coef}, r2: {model.r2}")
+    
+    model = Trend(x,y,"trigReg")
+    plt.title("Trigonometric Regression");
+    y_reg = model.pred(x)
+    make_plot(x,y,y_reg, name="trig_reg.png");
+    print(f"Coefs: {model.coef}, r2: {model.r2}")   
+    
+    model = Trend(x,y,"expReg")
+    plt.title("Exponential Regression");
+    y_reg = model.pred(x)
+    make_plot(x,y,y_reg, name="exp_reg.png");
+    print(f"Coefs: {model.coef}, r2: {model.r2}")   
+        
+        
+    
+        
+        
