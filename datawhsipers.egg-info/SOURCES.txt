@@ -1,0 +1,11 @@
+LICENSE
+README.md
+setup.py
+datawhispers/__init__.py
+datawhispers/advanced_prog.py
+datawhispers/datavis.py
+datawhsipers.egg-info/PKG-INFO
+datawhsipers.egg-info/SOURCES.txt
+datawhsipers.egg-info/dependency_links.txt
+datawhsipers.egg-info/requires.txt
+datawhsipers.egg-info/top_level.txt
