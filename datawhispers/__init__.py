@@ -1,2 +1,2 @@
 from datawhispers.datavis import *
-from advanced_prog import *
+from datawhispers.advanced_prog import *
