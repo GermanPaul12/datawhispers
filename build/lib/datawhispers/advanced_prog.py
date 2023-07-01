@@ -120,5 +120,98 @@ def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["l
     plt.ylabel(ylabel)
     if xticks: plt.xticks(xticks);
     if yticks: plt.yticks(yticks);
-    plt.show()
     plt.savefig("fig_reg.png");    
+    plt.show()
+
+
+def show_mnist_from_array(arr):    
+    """
+    Returns the image of the mnist number and saves it as mnist_num.png
+    arr: array of shape (784,) or (28,28)
+    """
+    if arr.shape == (784,):   
+        arr = arr.reshape((28, 28))
+    # Plot
+    plt.imshow(arr, cmap='gray')
+    plt.show()
+    plt.savefig("mnist_num.png")
+    
+    
+
+def add_mnist_num_arrays(num1,num2):
+    """
+    Returns the image of the result and saves it as mnist_result.png
+    arr: np.array of shape (784,) or (28,28)
+    """        
+    if num1.shape == (784,):
+        num1 = num1.reshape((28,28))
+    if num2.shape == (784,):
+        num2 = num2.reshape((28,28))
+    result = num1 + num2
+    plt.savefig("mnist_result.png")
+    plt.imshow(result) 
+    
+
+
+class Trend:
+    """ Trends Class. Trend objects have values and method attributes.
+    
+    """    
+    
+
+    def __init__(self, x,
+                       y,
+                       ansatz,
+                       deg = None,
+                       ):
+        '''Initialization of Trend with training input, training output,
+           ansatz (string) and deg (if polynomial ansatz)
+        '''
+        self.x = x
+        self.y = y
+        self.ansatz = ansatz
+        self.deg = deg
+        self.coef = self.coef()
+        self.r2 = self.r2()
+        
+    
+    def coef(self):
+        '''Computes coefficients of corresponding ansatz
+        '''
+    
+        if self.ansatz == 'linReg':
+            
+            coef = linReg(self.x, self.y)
+            
+        if self.ansatz == 'polReg':
+            
+            coef = polReg(self.x, self.y, deg = self.deg) 
+            
+        if self.ansatz == 'trigReg':
+            
+            coef = trigReg(self.x, self.y)
+            
+        if self.ansatz == 'expReg':
+            
+            coef = expReg(self.x, self.y)            
+    
+        return coef
+
+    
+    
+    def pred(self, x):
+        '''Computes the predction for input x and the computed corresponding
+           coefficients
+        ''' 
+        
+        values = pred(self.ansatz, self.coef, x)            
+        
+    
+        return  values      
+
+    
+    def r2(self):
+        '''Computes the coefficient of determination for the training input
+        ''' 
+        wert=r2(self.y, self.pred(self.x))
+        return round(wert, 3)        
