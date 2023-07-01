@@ -60,7 +60,7 @@ def expReg(x_in,y):
     a = np.exp(coef_first_step[1])
     return [a,b]
 
-def pred(ansatz, coef, x_in, freeRegAnsatz=None):
+def predict(ansatz, coef, x_in, freeRegAnsatz=None):
     '''Computes the predction for input x_in and the computed corresponding
        coefficients
     ''' 
@@ -219,7 +219,7 @@ class Trend:
            coefficients
         ''' 
         
-        values = pred(self.ansatz, self.coef, x)            
+        values = predict(self.ansatz, self.coef, x)            
         
     
         return  values      
@@ -235,7 +235,7 @@ class Trend:
     def make_easy_plot(self, file_name):
         '''Shows a plot of the data, the regression and saves the plot
         '''
-        make_plot(self.x, self.y, self.pred(x), name=file_name)
+        make_plot(x=self.x, y=self.y, y_reg=predict(self.ansatz, self.coef, self.x), name=file_name)
         print(f"r2: {self.r2}, coefs: {self.coef}")
     
     
@@ -264,8 +264,4 @@ def plot_all_regs(x,y, xticks=None, yticks=None):
     y_reg = model.pred(x)
     make_plot(x,y,y_reg, name="exp_reg.png");
     print(f"Coefs: {model.coef}, r2: {model.r2}")   
-        
-        
-    
-        
         
