@@ -120,5 +120,5 @@ def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["l
     plt.ylabel(ylabel)
     if xticks: plt.xticks(xticks);
     if yticks: plt.yticks(yticks);
-    plt.show()
     plt.savefig("fig_reg.png");    
+    plt.show()
