@@ -232,7 +232,7 @@ class Trend:
         return round(wert, 4)        
     
     
-    def make_plot(self, file_name):
+    def make_easy_plot(self, file_name):
         '''Shows a plot of the data, the regression and saves the plot
         '''
         make_plot(self.x, self.y, self.pred(x), name=file_name)
