@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: datawhispers
-Version: 0.2.6
+Version: 0.2.7
 Summary: This is a library to solve regression problems or statistical analysis for the DHBW Mannheim courses Advanced Programming and Data Visualisation
 Home-page: https://github.com/GermanPaul12/datawhispers
 Download-URL: https://github.com/GermanPaul12/datawhispers/archive/v_01.tar.gz
@@ -19,4 +19,13 @@ Classifier: Programming Language :: Python :: 3.6
 Classifier: Programming Language :: Python :: 3.11
 Classifier: Programming Language :: Python :: 3.9
 Classifier: Programming Language :: Python :: 3.10
+Description-Content-Type: text/markdown
 License-File: LICENSE
+
+# The DataWhispers module is used for solving regression and statistical problems
+
+## It was programmed for exams in advanced programming and data visualisation at DHBW Mannheim
+
+### Solve regression problems (lin, poly, trig, free, least_squares), plot the results and mnist numbers or do some statistical analysis with chi2, pearson or student-t
+
+#### To install just write "pip install datawhispers" in your command prompt of choice
