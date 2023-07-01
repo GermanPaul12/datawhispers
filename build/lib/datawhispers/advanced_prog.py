@@ -232,6 +232,13 @@ class Trend:
         return round(wert, 4)        
     
     
+    def make_plot(self, file_name):
+        '''Shows a plot of the data, the regression and saves the plot
+        '''
+        make_plot(self.x, self.y, self.pred(x), name=file_name)
+        print(f"r2: {self.r2}, coefs: {self.coef}")
+    
+    
 def plot_all_regs(x,y, xticks=None, yticks=None):
     model = Trend(x,y,"linReg")
     plt.title("Linear Regression");
