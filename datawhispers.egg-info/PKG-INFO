@@ -1,0 +1,22 @@
+Metadata-Version: 2.1
+Name: datawhispers
+Version: 0.1
+Summary: This is a library to solve regression problems or statistical analysis for the DHBW Mannheim courses Advanced Programming and Data Visualisation
+Home-page: https://github.com/GermanPaul12/datawhispers
+Download-URL: https://github.com/GermanPaul12/datawhispers/archive/v_01.tar.gz
+Author: German Paul
+Author-email: motets-rosiest-0r@icloud.com
+License: MIT
+Keywords: Python3,Data Visualisation,Statistical Analysis,Regression,Advanced Programming
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Build Tools
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+License-File: LICENSE
