@@ -10,7 +10,8 @@ Welcome to datawhispers's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   datawhispers
+   modules
+
 
 Indices and tables
 ==================
