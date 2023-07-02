@@ -13,6 +13,7 @@ jobs:
           python -m pip install --upgrade pip 
           pip install -r requirements.txt
           pip install git+https://github.com/sphinx-doc/sphinx
+          pip install sphinx sphinx_rtd_theme
       - name: Build HTML
         run: | 
           sphinx-build docs _build
