@@ -14,6 +14,9 @@ jobs:
       - name: Sphinx build
         run: |
           sphinx-build doc _build
+      - name: Run ghp import
+        run: |
+          ghp-import -n -p f doc/_build/html    
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}

@@ -1,3 +1,4 @@
+<img src="assets/logo.jpg"  height="200" width="200" />
 # The DataWhispers module is used for solving regression and statistical problems
 
 ## It was programmed for exams in advanced programming and data visualisation at DHBW Mannheim
@@ -6,4 +7,4 @@
 
 #### To install just write "pip install datawhispers" in your command prompt of choice
 
-[Sphinx Docs](https://germanpaul12.github.io/datawhispers/)
+Documentation: [![doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://germanpaul12.github.io/datawhispers/)
