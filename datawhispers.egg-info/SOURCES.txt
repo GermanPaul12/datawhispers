@@ -2,7 +2,7 @@ LICENSE
 README.md
 setup.py
 datawhispers/__init__.py
-datawhispers/advanced_prog.py
+datawhispers/advancedProg.py
 datawhispers/datavis.py
 datawhispers.egg-info/PKG-INFO
 datawhispers.egg-info/SOURCES.txt

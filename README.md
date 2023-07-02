@@ -1,6 +1,6 @@
 # DataWhispers Module
 
-![DataWhispers Logo](assets/logo.png)
+![DataWhispers Logo](https://github.com/GermanPaul12/datawhispers/blob/main/assets/logo.png)
 
 ## Documentation: [![doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://germanpaul12.github.io/datawhispers/)
 
