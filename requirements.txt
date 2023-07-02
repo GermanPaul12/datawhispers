@@ -3,3 +3,4 @@ numpy
 matplotlib
 seaborn
 scipy
+sphinx_toolbox
