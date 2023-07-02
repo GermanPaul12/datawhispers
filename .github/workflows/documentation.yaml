@@ -10,13 +10,8 @@ jobs:
       - uses: actions/setup-python@v3
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme
-      - name: Sphinx build
-        run: |
-          sphinx-build doc _build
-      - name: Sphinx build html
-        run: |
-          sphinx-build doc -W -b linkcheck -d _build/doctrees _build/html     
+          python -m pip install --upgrade pip 
+          pip install -r requirements.txt
       - name: Run ghp import
         run: |  
           ghp-import -n -p f doc/_build/html    
