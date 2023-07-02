@@ -4,7 +4,7 @@ datawhispers package
 Submodules
 ----------
 
-datawhispers.advanced_prog module
+datawhispers.advancedProg module
 ----------------------------------
 
 .. automodule:: datawhispers.advanced_prog
