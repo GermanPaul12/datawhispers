@@ -1,10 +1,13 @@
-<img src="assets/logo.jpg"  height="200" width="200" />
-# The **DataWhispers** module is used for solving regression and statistical problems
+# DataWhispers Module
 
-## It was programmed for exams in advanced programming and data visualisation at DHBW Mannheim
+![DataWhispers Logo](assets/logo.png =250x250)
 
-### Solve regression problems (lin, poly, trig, free, least_squares), plot the results and mnist numbers or do some statistical analysis with chi2, pearson or student-t
+## Documentation: [![doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://germanpaul12.github.io/datawhispers/)
 
-#### To install just write ```pip install datawhispers``` in your command prompt of choice
+### The **DataWhispers** module is used for solving regression and statistical problems
 
-Documentation: [![doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://germanpaul12.github.io/datawhispers/)
+It was programmed for exams in advanced programming and data visualisation at DHBW Mannheim
+
+Solve regression problems (lin, poly, trig, free, least_squares), plot the results and mnist numbers or do some statistical analysis with chi2, pearson or student-t
+
+To install just write ```pip install datawhispers``` in your command prompt of choice
