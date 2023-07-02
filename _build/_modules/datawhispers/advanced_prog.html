@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>datawhispers.advanced_prog &mdash; datawhispers 0.2.6 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            datawhispers
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../datawhispers.html">datawhispers package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">datawhispers</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">datawhispers.advanced_prog</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for datawhispers.advanced_prog</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">least_squares</span><span class="p">,</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">curve_fit</span>
+<span class="kn">import</span> <span class="nn">sympy</span> <span class="k">as</span> <span class="nn">sym</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">atan</span> <span class="k">as</span> <span class="n">arctan</span>
+<span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">tan</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">ln</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">symbols</span><span class="p">(</span><span class="s1">&#39;a, b, c, x&#39;</span><span class="p">,</span> <span class="n">real</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<div class="viewcode-block" id="linReg"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.linReg">[docs]</a><span class="k">def</span> <span class="nf">linReg</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Time series linear regression. Returns coefs in polynomial descending order.</span>
+<span class="sd">       Coefs computed analytically.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">inner</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">x_in</span><span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_in</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="polReg"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.polReg">[docs]</a><span class="k">def</span> <span class="nf">polReg</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">deg</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Time series polynomial regression. Returns coefs in polynomial descending order.</span>
+<span class="sd">       Coefs computed numerically.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">deg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">coefs</span></div>
+
+<div class="viewcode-block" id="freeReg"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.freeReg">[docs]</a><span class="k">def</span> <span class="nf">freeReg</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">ansatz</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Regression with user ansatz. The ansatz is expected to depend on three</span>
+<span class="sd">       parameters, a, b, and c. The ansatz is expected to be a string with a </span>
+<span class="sd">       symbolic formulation. for instance: &#39;a*arctan(b*x_in+c)&#39;.</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+    <span class="n">test_func</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="nb">eval</span><span class="p">(</span><span class="n">ansatz</span><span class="p">))</span>
+    
+    <span class="n">res</span> <span class="o">=</span> <span class="n">curve_fit</span><span class="p">(</span><span class="n">test_func</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">y_out</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    </div>
+
+
+<div class="viewcode-block" id="trigReg"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.trigReg">[docs]</a><span class="k">def</span> <span class="nf">trigReg</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Time seriessine regression. Returns amplitude, frequency and phase</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+    <span class="n">timestep</span> <span class="o">=</span> <span class="n">x_in</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x_in</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_in</span><span class="p">),</span> <span class="n">timestep</span><span class="p">)</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+    
+    <span class="n">amplitude</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">absolute</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">])</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span>
+    <span class="n">frequenz</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_in</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>    
+    
+    <span class="n">coefs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">amplitude</span><span class="p">,</span> <span class="n">frequenz</span><span class="p">,</span> <span class="n">angle</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">coefs</span></div>
+
+<div class="viewcode-block" id="expReg"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.expReg">[docs]</a><span class="k">def</span> <span class="nf">expReg</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Time series exponential regression. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">coef_first_step</span> <span class="o">=</span> <span class="n">linReg</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">coef_first_step</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">coef_first_step</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="predict"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.predict">[docs]</a><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">ansatz</span><span class="p">,</span> <span class="n">coef</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">freeRegAnsatz</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Computes the predction for input x_in and the computed corresponding</span>
+<span class="sd">       coefficients</span>
+<span class="sd">    &#39;&#39;&#39;</span> 
+        
+    <span class="k">if</span> <span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;linReg&#39;</span> <span class="ow">or</span> <span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;polReg&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">coef</span><span class="p">)(</span><span class="n">x_in</span><span class="p">)</span>     
+            
+    <span class="k">if</span> <span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;trigReg&#39;</span><span class="p">:</span>
+        <span class="n">amplitude</span><span class="p">,</span> <span class="n">frequenz</span><span class="p">,</span> <span class="n">angle</span> <span class="o">=</span> <span class="n">coef</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">amplitude</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">frequenz</span><span class="o">*</span><span class="n">x_in</span><span class="o">+</span><span class="n">angle</span><span class="p">)</span>  
+        
+    <span class="k">if</span> <span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;expReg&#39;</span><span class="p">:</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">x_in</span><span class="p">)</span> 
+        
+    <span class="k">if</span> <span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;freeReg&#39;</span><span class="p">:</span>
+        <span class="c1">#print(eval(freeRegAnsatz))</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">freeRegAnsatz</span><span class="p">)</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">subs</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">coef</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">f_num</span> <span class="o">=</span> <span class="n">sym</span><span class="o">.</span><span class="n">lambdify</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>       
+        <span class="n">values</span> <span class="o">=</span> <span class="n">f_num</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span>
+        
+        
+    <span class="k">return</span>  <span class="n">values</span> </div>
+
+<div class="viewcode-block" id="leastSquares"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.leastSquares">[docs]</a><span class="k">def</span> <span class="nf">leastSquares</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">least_squares</span><span class="p">(</span><span class="n">func</span><span class="p">,</span><span class="n">x</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="r2"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.r2">[docs]</a><span class="k">def</span> <span class="nf">r2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Coefficient of determination</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">wert</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">y_pred</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wert</span></div>
+    
+
+<div class="viewcode-block" id="PolyCoefficients"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.PolyCoefficients">[docs]</a><span class="k">def</span> <span class="nf">PolyCoefficients</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns a polynomial for ``x`` values for the ``coeffs`` provided.</span>
+
+<span class="sd">    The coefficients must be in ascending order (``x**0`` to ``x**o``).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">o</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">coeffs</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;# This is a polynomial of order </span><span class="si">{</span><span class="n">o</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">o</span><span class="p">):</span>
+        <span class="n">y</span> <span class="o">+=</span> <span class="n">coeffs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="n">i</span>
+    <span class="k">return</span> <span class="n">y</span></div>
+
+<div class="viewcode-block" id="make_plot"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.make_plot">[docs]</a><span class="k">def</span> <span class="nf">make_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_reg</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[],</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;lightblue&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fig_reg.png&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Outputs a graph for (x and y) and (x and y_reg) and saves it as fig_reg.png</span>
+<span class="sd">    x: array with x-values</span>
+<span class="sd">    y: array with y-values</span>
+<span class="sd">    y_reg: array with regression y_values</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y_reg</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span> 
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xticks</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">xticks</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">yticks</span><span class="p">:</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">yticks</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">);</span>  
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="show_mnist_from_array"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.show_mnist_from_array">[docs]</a><span class="k">def</span> <span class="nf">show_mnist_from_array</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>    
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the image of the mnist number and saves it as mnist_num.png</span>
+<span class="sd">    arr: array of shape (784,) or (28,28)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">785</span><span class="p">,):</span> <span class="n">label</span><span class="p">,</span><span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">784</span><span class="p">,):</span>   
+        <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+    <span class="c1"># Plot</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MNIST Number </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;mnist_num.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1200</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
+    
+
+<div class="viewcode-block" id="show_mnist_from_file"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.show_mnist_from_file">[docs]</a><span class="k">def</span> <span class="nf">show_mnist_from_file</span><span class="p">(</span><span class="n">filepath</span><span class="p">):</span>    
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span> 
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">label</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">i</span><span class="p">:</span>   
+                    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)])</span>
+                    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">785</span><span class="p">,):</span> <span class="n">label</span><span class="p">,</span><span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">784</span><span class="p">,):</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>    
+                    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="n">i</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;;&quot;</span><span class="p">)])</span>
+                    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">785</span><span class="p">,):</span> <span class="n">label</span><span class="p">,</span><span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">arr</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">arr</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">784</span><span class="p">,):</span> <span class="n">arr</span> <span class="o">=</span> <span class="n">arr</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">))</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MNIST Number </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>    
+                <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+                <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>   
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sorry try the func &#39;show_mnist_from_array&#39; because your file does not seem to work with this method&quot;</span><span class="p">)</span>         </div>
+
+
+<div class="viewcode-block" id="add_mnist_num_arrays"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.add_mnist_num_arrays">[docs]</a><span class="k">def</span> <span class="nf">add_mnist_num_arrays</span><span class="p">(</span><span class="n">num1</span><span class="p">,</span><span class="n">num2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns the image of the result and saves it as mnist_result.png</span>
+<span class="sd">    arr: np.array of shape (784,) or (28,28)</span>
+<span class="sd">    &quot;&quot;&quot;</span>        
+    <span class="k">if</span> <span class="n">num1</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">784</span><span class="p">,):</span>
+        <span class="n">num1</span> <span class="o">=</span> <span class="n">num1</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">num2</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">784</span><span class="p">,):</span>
+        <span class="n">num2</span> <span class="o">=</span> <span class="n">num2</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">num1</span> <span class="o">+</span> <span class="n">num2</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;mnist_result.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> </div>
+    
+
+
+<div class="viewcode-block" id="Trend"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.Trend">[docs]</a><span class="k">class</span> <span class="nc">Trend</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Trends Class. Trend objects have values and method attributes.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span>
+                       <span class="n">y</span><span class="p">,</span>
+                       <span class="n">ansatz</span><span class="p">,</span>
+                       <span class="n">deg</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                       <span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Initialization of Trend with training input, training output,</span>
+<span class="sd">           ansatz (string) and deg (if polynomial ansatz)</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span> <span class="o">=</span> <span class="n">ansatz</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deg</span> <span class="o">=</span> <span class="n">deg</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">coef</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">r2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">r2</span><span class="p">()</span>
+        
+    
+<div class="viewcode-block" id="Trend.coef"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.Trend.coef">[docs]</a>    <span class="k">def</span> <span class="nf">coef</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Computes coefficients of corresponding ansatz</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+    
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;linReg&#39;</span><span class="p">:</span>
+            
+            <span class="n">coef</span> <span class="o">=</span> <span class="n">linReg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;polReg&#39;</span><span class="p">:</span>
+            
+            <span class="n">coef</span> <span class="o">=</span> <span class="n">polReg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span> 
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;trigReg&#39;</span><span class="p">:</span>
+            
+            <span class="n">coef</span> <span class="o">=</span> <span class="n">trigReg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span> <span class="o">==</span> <span class="s1">&#39;expReg&#39;</span><span class="p">:</span>
+            
+            <span class="n">coef</span> <span class="o">=</span> <span class="n">expReg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>            
+    
+        <span class="k">return</span> <span class="n">coef</span></div>
+
+    
+    
+<div class="viewcode-block" id="Trend.pred"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.Trend.pred">[docs]</a>    <span class="k">def</span> <span class="nf">pred</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Computes the predction for input x and the computed corresponding</span>
+<span class="sd">           coefficients</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        
+        <span class="n">values</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>            
+        
+    
+        <span class="k">return</span>  <span class="n">values</span>      </div>
+
+    
+<div class="viewcode-block" id="Trend.r2"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.Trend.r2">[docs]</a>    <span class="k">def</span> <span class="nf">r2</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Computes the coefficient of determination for the training input</span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+        <span class="n">wert</span><span class="o">=</span><span class="n">r2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pred</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">wert</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>        </div>
+    
+    
+<div class="viewcode-block" id="Trend.make_easy_plot"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.Trend.make_easy_plot">[docs]</a>    <span class="k">def</span> <span class="nf">make_easy_plot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;Shows a plot of the data, the regression and saves the plot</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">make_plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">y_reg</span><span class="o">=</span><span class="n">predict</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ansatz</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="n">name</span><span class="o">=</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;r2: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">r2</span><span class="si">}</span><span class="s2">, coefs: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">coef</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div></div>
+    
+    
+<div class="viewcode-block" id="plot_all_regs"><a class="viewcode-back" href="../../datawhispers.html#datawhispers.advanced_prog.plot_all_regs">[docs]</a><span class="k">def</span> <span class="nf">plot_all_regs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">yticks</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Trend</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;linReg&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Linear Regression&quot;</span><span class="p">);</span>
+    <span class="n">y_reg</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pred</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">make_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_reg</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;lin_reg_plot.png&quot;</span><span class="p">);</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefs: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef</span><span class="si">}</span><span class="s2">, r2: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Trend</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;polReg&quot;</span><span class="p">,</span> <span class="n">deg</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Polynomial Regression </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> degree&quot;</span><span class="p">);</span>
+        <span class="n">y_reg</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pred</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">make_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_reg</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;pol_reg</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">);</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefs: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef</span><span class="si">}</span><span class="s2">, r2: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Trend</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;trigReg&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Trigonometric Regression&quot;</span><span class="p">);</span>
+    <span class="n">y_reg</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pred</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">make_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_reg</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;trig_reg.png&quot;</span><span class="p">);</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefs: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef</span><span class="si">}</span><span class="s2">, r2: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Trend</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="s2">&quot;expReg&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Exponential Regression&quot;</span><span class="p">);</span>
+    <span class="n">y_reg</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pred</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">make_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">y_reg</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;exp_reg.png&quot;</span><span class="p">);</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Coefs: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef</span><span class="si">}</span><span class="s2">, r2: </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">r2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>   </div>
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, German Paul.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
