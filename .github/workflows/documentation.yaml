@@ -14,7 +14,8 @@ jobs:
           pip install -r requirements.txt
           pip install git+https://github.com/sphinx-doc/sphinx
           pip install sphinx sphinx_rtd_theme
-          pip install ghp-import
+          sudo apt-get update -y
+          sudo apt-get install -y ghp-import
       - name: Build HTML
         run: | 
           sphinx-build docs _build
