@@ -4,4 +4,5 @@ datawhispers
 .. toctree::
    :maxdepth: 4
 
-   datawhispers
+   advanced_prog
+   datavis
