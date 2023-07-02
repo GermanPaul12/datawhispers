@@ -10,10 +10,10 @@ import sys
 sys.path.insert(0, os.path.abspath('..'))
 
 
-project = 'datawhispers'
+project = 'DataWhispers'
 copyright = '2023, German Paul'
 author = 'German Paul'
-release = '0.2.6'
+release = '00.00.01'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -21,8 +21,7 @@ release = '0.2.6'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
-    'sphinx.ext.napoleon',
-    "sphinx.ext.githubpages",
+    'sphinx.ext.napoleon'
 ]
 
 templates_path = ['_templates']
