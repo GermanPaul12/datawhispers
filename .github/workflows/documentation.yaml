@@ -24,7 +24,7 @@ jobs:
           cd ..
       - name: Run ghp import
         run: |  
-          ghp-import -n -p docs/_build/html    
+          ghp-import -n -p -f docs/_build/html    
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
