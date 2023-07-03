@@ -10,6 +10,9 @@ Welcome to DataWhispers's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   README
+   intro
+   code_example
    modules
 
 Indices and tables
