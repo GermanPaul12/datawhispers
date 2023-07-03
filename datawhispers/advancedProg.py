@@ -18,7 +18,7 @@ def linReg(x_in,y):
             coefs in descending order
 
         Raises:
-        
+            None
     '''
     
     a = (np.inner(x_in,y) - (len(x_in) * np.mean(x_in) * np.mean(y))) / (np.inner(x_in,x_in) - (len(x_in) * ((np.mean(x_in))**2)))
@@ -38,7 +38,7 @@ def polReg(x_in,y, deg):
             coefs in descending order
 
         Raises:
-        
+            None
     '''
     
     coefs = np.polyfit(x_in, y, deg)
@@ -58,7 +58,7 @@ def freeReg(x_in, y_out, ansatz):
             coefs
 
         Raises:
-        
+            None
     '''    
     test_func = sym.lambdify((x, a, b, c), eval(ansatz))
     
@@ -78,7 +78,7 @@ def trigReg(x_in, y):
             amplitude, frequency and phase
 
         Raises:
-        
+            None
     '''    
     timestep = x_in[1]-x_in[0]
     x_in = np.fft.fftfreq(len(x_in), timestep)
@@ -130,7 +130,12 @@ def leastSquares(func,x):
     '''Solve a nonlinear least-squares problem with bounds on the variables.
     
         Args:
-            func: Function which computes the vector of residuals, with the signature fun(x, *args, **kwargs), i.e., the minimization proceeds with respect to its first argument. The argument x passed to this function is an ndarray of shape (n,) (never a scalar, even for n=1). It must allocate and return a 1-D array_like of shape (m,) or a scalar. If the argument x is complex or the function fun returns complex residuals, it must be wrapped in a real function of real arguments, as shown at the end of the Examples section.
+            func: Function which computes the vector of residuals, 
+            with the signature fun(x, *args, **kwargs), i.e., the minimization proceeds with respect to its first argument. 
+            The argument x passed to this function is an ndarray of shape (n,) (never a scalar, even for n=1). 
+            It must allocate and return a 1-D array_like of shape (m,) or a scalar. 
+            If the argument x is complex or the function fun returns complex residuals, 
+            it must be wrapped in a real function of real arguments, as shown at the end of the Examples section.
             x: Array with x-values
             
 
@@ -145,7 +150,7 @@ def leastSquares(func,x):
                 Vector of residuals at the solution.
 
         Raises:
-        
+            None
     '''
     return least_squares(func,x)
 
@@ -188,6 +193,7 @@ def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["l
         Outputs the graph and saves it
         
     Raises:
+        None
     '''
     plt.plot(x,y_reg,color=colors[1]);
     plt.scatter(x,y, color=colors[0]);
@@ -210,7 +216,7 @@ def show_mnist_from_array(arr):
         Outputs the image
         
     Raises:
-    
+        None
     """
     label = ''
     if arr.shape == (785,): label,arr = arr[0],arr[1:].reshape((28, 28))
@@ -234,7 +240,7 @@ def show_mnist_from_file(filepath):
         Outputs the images
         
     Raises:
-    
+        None
     """
     with open(filepath) as f: 
         try:
@@ -267,7 +273,7 @@ def add_mnist_num_arrays(num1,num2):
         Outputs the image
         
     Raises:
-    
+        None
     """        
     if num1.shape == (784,):
         num1 = num1.reshape((28,28))
@@ -364,7 +370,7 @@ def plot_all_regs(x,y, xticks=None, yticks=None):
         Outputs the graphs and saves them
         
     Raises:
-    
+        None
     """ 
     model = Trend(x,y,"linReg")
     plt.title("Linear Regression");
