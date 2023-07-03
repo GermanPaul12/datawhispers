@@ -7,7 +7,7 @@ Submodules
 datawhispers.advancedProg module
 ----------------------------------
 
-.. automodule:: datawhispers.advanced_prog
+.. automodule:: datawhispers.advancedProg
    :members:
    :undoc-members:
    :show-inheritance:
@@ -19,6 +19,14 @@ datawhispers.datavis module
    :members:
    :undoc-members:
    :show-inheritance:
+
+datawhispers.mathFuncs module
+----------------------------------
+
+.. automodule:: datawhispers.mathFuncs
+   :members:
+   :undoc-members:
+   :show-inheritance:   
 
 Module contents
 ---------------
