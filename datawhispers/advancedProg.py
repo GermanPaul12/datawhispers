@@ -175,8 +175,7 @@ def PolyCoefficients(x, coeffs):
     return y
 
 def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["lightblue", "black"], name="fig_reg.png"):
-    '''
-    Outputs a graph for (x and y) and (x and y_reg) and saves it as fig_reg.png
+    '''Outputs a graph for (x and y) and (x and y_reg) and saves it as fig_reg.png
     
     Args:
         x: array with x-values
@@ -206,8 +205,7 @@ def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["l
 
 
 def show_mnist_from_array(arr):    
-    """
-    Returns the image of the mnist number and saves it as mnist_num.png
+    """Returns the image of the mnist number and saves it as mnist_num.png
     
     Args:
         arr: of size (784,) or (28,28) with values from 0 to 255
@@ -230,8 +228,7 @@ def show_mnist_from_array(arr):
     
 
 def show_mnist_from_file(filepath):    
-    """
-    Returns the images of the mnist numbers in the file
+    """Returns the images of the mnist numbers in the file
     
     Args:
         filepath: csv-filepath with lines consisting of values from 0 to 255 with length of 785 or 784
@@ -262,8 +259,7 @@ def show_mnist_from_file(filepath):
 
 
 def add_mnist_num_arrays(num1,num2):
-    """
-    Returns the image of the result and saves it as mnist_result.png
+    """Returns the image of the result and saves it as mnist_result.png
     
     Args:
         num1: np.array of length (784,) or (28,28)
