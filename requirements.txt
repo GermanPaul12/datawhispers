@@ -7,5 +7,5 @@ sympy
 streamlit
 Pillow
 datawhispers
-cv2
+opencv-python
 io
