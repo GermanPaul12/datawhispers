@@ -7,4 +7,4 @@ sympy
 streamlit
 Pillow
 datawhispers
-opencv-python
+opencv-python-headless==4.5.4.60
