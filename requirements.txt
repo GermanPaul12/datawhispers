@@ -7,3 +7,5 @@ sympy
 streamlit
 Pillow
 datawhispers
+cv2
+io
