@@ -9,6 +9,15 @@ a, b, c, x = sym.symbols('a, b, c, x', real=True)
 def linReg(x_in,y):
     '''Time series linear regression. Returns coefs in polynomial descending order.
        Coefs computed analytically.
+       
+        Args:
+            x_in: Array with x-values
+            y: Array with y-values
+
+        Returns:
+            coefs in descending order
+
+        Raises:
     '''
     
     a = (np.inner(x_in,y) - (len(x_in) * np.mean(x_in) * np.mean(y))) / (np.inner(x_in,x_in) - (len(x_in) * ((np.mean(x_in))**2)))
@@ -18,6 +27,15 @@ def linReg(x_in,y):
 def polReg(x_in,y, deg):
     '''Time series polynomial regression. Returns coefs in polynomial descending order.
        Coefs computed numerically.
+       Args:
+            x_in: Array with x-values
+            y: Array with y-values
+            deg: the degree of the polynomial
+
+        Returns:
+            coefs in descending order
+
+        Raises:
     '''
     
     coefs = np.polyfit(x_in, y, deg)
@@ -27,6 +45,15 @@ def freeReg(x_in, y_out, ansatz):
     '''Regression with user ansatz. The ansatz is expected to depend on three
        parameters, a, b, and c. The ansatz is expected to be a string with a 
        symbolic formulation. for instance: 'a*arctan(b*x_in+c)'.
+       Args:
+            x_in: Array with x-values
+            y: Array with y-values
+            ansatz: "linReg", "polReg", "trigReg" or "expReg"
+
+        Returns:
+            coefs
+
+        Raises:
     '''    
     test_func = sym.lambdify((x, a, b, c), eval(ansatz))
     
@@ -37,6 +64,14 @@ def freeReg(x_in, y_out, ansatz):
 
 def trigReg(x_in, y):
     '''Time seriessine regression. Returns amplitude, frequency and phase
+        Args:
+            x_in: Array with x-values
+            y: Array with y-values
+
+        Returns:
+            amplitude, frequency and phase
+
+        Raises:
     '''    
     timestep = x_in[1]-x_in[0]
     x_in = np.fft.fftfreq(len(x_in), timestep)
@@ -85,6 +120,24 @@ def predict(ansatz, coef, x_in, freeRegAnsatz=None):
     return  values 
 
 def leastSquares(func,x):
+    '''Solve a nonlinear least-squares problem with bounds on the variables.
+        Args:
+            func: Function which computes the vector of residuals, with the signature fun(x, *args, **kwargs), i.e., the minimization proceeds with respect to its first argument. The argument x passed to this function is an ndarray of shape (n,) (never a scalar, even for n=1). It must allocate and return a 1-D array_like of shape (m,) or a scalar. If the argument x is complex or the function fun returns complex residuals, it must be wrapped in a real function of real arguments, as shown at the end of the Examples section.
+            x: Array with x-values
+            
+
+        Returns:
+            x: ndarray, shape (n,)
+                Solution found.
+
+            cost: float
+                Value of the cost function at the solution.
+
+            func: ndarray, shape (m,)
+                Vector of residuals at the solution.
+
+        Raises:
+    '''
     return least_squares(func,x)
 
 
@@ -110,9 +163,19 @@ def PolyCoefficients(x, coeffs):
 def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["lightblue", "black"], name="fig_reg.png"):
     '''
     Outputs a graph for (x and y) and (x and y_reg) and saves it as fig_reg.png
-    x: array with x-values
-    y: array with y-values
-    y_reg: array with regression y_values
+    Args:
+        x: array with x-values
+        y: array with y-values
+        y_reg: array with regression y_values
+        xticks (optional): list with values to use as x-ticks
+        yticks (optional): list with values to use as y-ticks
+        xlabel (optional): defualt "x"
+        ylabel (optional): defualt "y"
+        colors (optional): default ["lightblue", "black"] scatter=lightblue and line=black
+        name (optional): default "fig_reg.png"
+    Returns:
+        Outputs the graph and saves it
+    Raises:
     '''
     plt.plot(x,y_reg,color=colors[1]);
     plt.scatter(x,y, color=colors[0]);
@@ -127,7 +190,11 @@ def make_plot(x,y,y_reg, xticks=[], yticks=[],xlabel="x", ylabel="y", colors=["l
 def show_mnist_from_array(arr):    
     """
     Returns the image of the mnist number and saves it as mnist_num.png
-    arr: array of shape (784,) or (28,28)
+    Args:
+        arr: of size (784,) or (28,28) with values from 0 to 255
+    Returns:
+        Outputs the image
+    Raises:
     """
     label = ''
     if arr.shape == (785,): label,arr = arr[0],arr[1:].reshape((28, 28))
@@ -141,6 +208,14 @@ def show_mnist_from_array(arr):
     
 
 def show_mnist_from_file(filepath):    
+    """
+    Returns the images of the mnist numbers in the file
+    Args:
+        filepath: csv-filepath with lines consisting of values from 0 to 255 with length of 785 or 784
+    Returns:
+        Outputs the images
+    Raises:
+    """
     with open(filepath) as f: 
         try:
             label = ""
@@ -163,7 +238,12 @@ def show_mnist_from_file(filepath):
 def add_mnist_num_arrays(num1,num2):
     """
     Returns the image of the result and saves it as mnist_result.png
-    arr: np.array of shape (784,) or (28,28)
+    Args:
+        num1: np.array of length (784,) or (28,28)
+        num2: np.array of length (784,) or (28,28)
+    Returns:
+        Outputs the image
+    Raises:
     """        
     if num1.shape == (784,):
         num1 = num1.reshape((28,28))
@@ -247,6 +327,17 @@ class Trend:
     
     
 def plot_all_regs(x,y, xticks=None, yticks=None):
+    """
+    Returns the regression of all types and saves them as png
+    Args:
+        x: array with x-values
+        y: array with y-values
+        xticks (optional): list with values to use as x-ticks
+        yticks (optional): list with values to use as y-ticks
+    Returns:
+        Outputs the graphs and saves them
+    Raises:
+    """ 
     model = Trend(x,y,"linReg")
     plt.title("Linear Regression");
     y_reg = model.pred(x)
