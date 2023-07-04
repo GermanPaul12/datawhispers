@@ -130,3 +130,78 @@ with st.expander("Add MNIST"):
     except Exception as e:
         st.write("Sorry try the module datawhsipers.advancedProg because your file does not seem to work with this method") 
         st.error(e)
+
+st.subheader("Make Regression")
+
+with st.expander("Make Regressions"):
+    try:
+        st.session_state["data_dfs"] = ["Df not uploaded yet", "Df2 not uploaded yet"]   
+        if st.checkbox("Upload df number 1"):
+            upload_df = st.file_uploader("Choose a CSV file", key="df_make_reg")
+            if upload_df is not None:
+                st.session_state.df1 = []            
+                name = upload_df.name
+                bytes_data = upload_df.getvalue()
+                data = upload_df.getvalue().decode('utf-8').splitlines()     
+                
+                for index in range(len(data)):
+                    sep=","
+                    if data[index][0] == "#":
+                        data = data[1:]   
+                        continue
+                    if ";" in data[index][0]:
+                        sep=";"
+                    data = [data[i].split(";") for i in range(len(data))]
+                    cols,arr=data[0],data[1:]
+                    #data  
+                    st.session_state.df1 = pd.DataFrame(arr, columns=cols)      
+                    st.session_state["data_dfs"][0] = name
+                    break
+                if st.checkbox(f"Show the Dataframe of {st.session_state['data_dfs'][0]}", key="chkbox 1"):    
+                    st.session_state.df1         
+                    
+                if st.checkbox("Upload df number 2"):
+                    upload_df2 = st.file_uploader("Choose a CSV file", key="df_make_reg2")
+                    if upload_df2 is not None: 
+                        st.session_state.df2=[]          
+                        name = upload_df2.name
+                        bytes_data = upload_df2.getvalue()
+                        data = upload_df2.getvalue().decode('utf-8').splitlines()     
+                        
+                        for index in range(len(data)):
+                            sep=","
+                            if data[index][0] == "#":
+                                data = data[1:]   
+                                continue
+                            if ";" in data[index][0]:
+                                sep=";"
+                            data = [data[i].split(";") for i in range(len(data))]
+                            cols,arr=data[0],data[1:]
+                            #data  
+                            st.session_state.df2 = pd.DataFrame(arr, columns=cols)      
+                            st.session_state["data_dfs"][1] = name
+                            break
+                        if st.checkbox(f"Show the Dataframe of {st.session_state['data_dfs'][1]}", key="chkbox 2"):    
+                            st.session_state.df2               
+
+                with st.container():
+                    st.markdown("### Your Data")
+                    col1,col2= st.columns(2)  
+                    with col1:
+                        st.markdown("### Your x-value:")
+                        selected_df_1 = st.selectbox("Select your df", [st.session_state.data_dfs[i] for i in range(len(st.session_state.data_dfs))], index=0, key="selectbox_df_1")
+                        chosen_df_1=st.session_state.df1 if selected_df_1 == st.session_state.data_dfs[0] else st.session_state.df2
+                        selected_column_1 = st.selectbox("Select your column", [column for column in chosen_df_1.columns], index=0, key="selectbox_col_1")
+                    with col2:
+                        st.markdown("### Your y-value:")
+                        selected_df_2 = st.selectbox("Select your df", [st.session_state.data_dfs[i] for i in range(len(st.session_state.data_dfs))], index=0, key="selectbox_df_2")
+                        chosen_df_2=st.session_state.df1 if selected_df_2 == st.session_state.data_dfs[0] else st.session_state.df2
+                        selected_column_2 = st.selectbox("Select your column", [column for column in chosen_df_2.columns], index=0, key="selectbox_col_2")    
+                    st.markdown("### Your Regression")
+                    col1,col2= st.columns(2) 
+                    with col1: 
+                        st.selectbox()    
+        
+    except Exception as e:
+        st.write("Sorry try the module datawhsipers.advancedProg because your file does not seem to work with this method") 
+        st.error(e)        
