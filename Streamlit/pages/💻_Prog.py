@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from PIL import Image
 import cv2
-from io import BytesIO,BufferedReader
+from io import BytesIO,BufferedReader, StringIO
 
 st.title("Welcome to the 💻 Advanced Programming Page")
 
@@ -151,10 +151,11 @@ with st.expander("Make Regressions"):
                         continue
                     if ";" in data[index][0]:
                         sep=";"
-                    data = [data[i].split(";") for i in range(len(data))]
+                    data = [data[i].split(sep) for i in range(len(data))]
                     cols,arr=data[0],data[1:]
                     #data  
-                    st.session_state.df1 = pd.DataFrame(arr, columns=cols)      
+                    st.session_state.df1 = pd.DataFrame(arr, columns=cols)   
+                    st.session_state.df1 = st.session_state.df1.apply(pd.to_numeric, errors='ignore')    
                     st.session_state["data_dfs"][0] = name
                     break
                 if st.checkbox(f"Show the Dataframe of {st.session_state['data_dfs'][0]}", key="chkbox 1"):    
@@ -175,10 +176,11 @@ with st.expander("Make Regressions"):
                                 continue
                             if ";" in data[index][0]:
                                 sep=";"
-                            data = [data[i].split(";") for i in range(len(data))]
+                            data = [data[i].split(sep) for i in range(len(data))]
                             cols,arr=data[0],data[1:]
                             #data  
                             st.session_state.df2 = pd.DataFrame(arr, columns=cols)      
+                            st.session_state.df2 = st.session_state.df2.apply(pd.to_numeric, errors='ignore')  
                             st.session_state["data_dfs"][1] = name
                             break
                         if st.checkbox(f"Show the Dataframe of {st.session_state['data_dfs'][1]}", key="chkbox 2"):    
@@ -196,11 +198,82 @@ with st.expander("Make Regressions"):
                         st.markdown("### Your y-value:")
                         selected_df_2 = st.selectbox("Select your df", [st.session_state.data_dfs[i] for i in range(len(st.session_state.data_dfs))], index=0, key="selectbox_df_2")
                         chosen_df_2=st.session_state.df1 if selected_df_2 == st.session_state.data_dfs[0] else st.session_state.df2
-                        selected_column_2 = st.selectbox("Select your column", [column for column in chosen_df_2.columns], index=0, key="selectbox_col_2")    
+                        selected_column_2 = st.selectbox("Select your column", [column for column in chosen_df_2.columns], index=1, key="selectbox_col_2")    
                     st.markdown("### Your Regression")
                     col1,col2= st.columns(2) 
                     with col1: 
-                        st.selectbox()    
+                        ansatz = st.selectbox("Ansatz", ["linReg", "polReg", "trigReg", "expReg"])    
+                        
+                        if ansatz == "polReg": 
+                            with col2:
+                                deg = st.selectbox("Degree", [i for i in range(2, 15)])
+                                model = ap.Trend(chosen_df_1[selected_column_1], chosen_df_2[selected_column_2], ansatz=ansatz, deg=int(deg)) 
+                                deg   
+                        else:
+                            pass
+                            model = ap.Trend(chosen_df_1[selected_column_1], chosen_df_2[selected_column_2], ansatz=ansatz)
+
+                        #buffer = StringIO()    
+                        #chosen_df_1.info(buf=buffer)
+                        #s = buffer.getvalue()
+                        #st.text(s)    
+                        if st.checkbox("Change advanced Plot settings"):
+                            col1, col2, col3 = st.columns(3)
+                            with col1: 
+                                st.write("x-ticks")
+                            with col2:    
+                                xticks_start = st.text_input("start (input integer)", 0, key="text_xticks_start", )
+                            with col3:    
+                                xticks_end = st.text_input("end (input integer)", 0, key="text_xticks_end", )    
+                            col1, col2, col3 = st.columns(3)
+                            with col1: 
+                                st.write("y-ticks")
+                            with col2:    
+                                yticks_start = st.text_input("start (input integer)", 0, key="text_yticks_start", )
+                            with col3:    
+                                yticks_end = st.text_input("end (input integer)", 0, key="text_yticks_end", )    
+                            col1, col2, col3 = st.columns(3)      
+                            with col1:
+                                xlabel = st.text_input("Input a xlabel", "x", key="xlabel")
+                            with col2:    
+                                ylabel = st.text_input("Input a ylabel", "y", key="ylabel")    
+                            with col3:    
+                                title = st.text_input("Input a title", "", key="title")        
+                            col1, col2 = st.columns(2)
+                            with col1:
+                                sc_color = st.text_input("Input a color for the scatterplot", "lightblue", key="scatter_color")
+                            with col2:
+                                pt_color = st.text_input("Input a color for the reg plot", "black", key="plot_color")   
+                            fig, ax = plt.subplots()                   
+                            ax.plot(model.x,ap.predict(model.ansatz, model.coef, model.x),color=pt_color);
+                            ax.scatter(model.x,model.y, color=sc_color);
+                            ax.set_xlabel(xlabel) 
+                            ax.set_ylabel(ylabel)
+                            if xticks_start and xticks_end: ax.set_xticks([xticks_start, xticks_end]);
+                            if yticks_start and yticks_end: ax.set_yticks([yticks_start, yticks_end]);
+                            #plt.savefig(f"{name}");  
+                            st.pyplot(fig)
+                        else:
+                            fig, ax = plt.subplots()                   
+                            ax.plot(model.x,ap.predict(model.ansatz, model.coef, model.x),color="black");
+                            ax.scatter(model.x,model.y, color="lightblue");  
+                            st.pyplot(fig)
+                            #plt.savefig(f"{name}");
+                                
+                            
+                        st.write(f"r2-value: {model.r2}, coefs: {model.coef}")  
+                        filename = st.text_input("Enter your desired filename", "reg_plot", key="filename_reg")
+                        filename=filename+".png"
+                        fig.savefig(filename)
+                        with open(filename, "rb") as img:
+                            btn = st.download_button(
+                                label="Download graph",
+                                data=img,
+                                file_name=filename,
+                                mime="image/png"
+    )
+                                
+                        
         
     except Exception as e:
         st.write("Sorry try the module datawhsipers.advancedProg because your file does not seem to work with this method") 
