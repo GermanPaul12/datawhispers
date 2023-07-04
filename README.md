@@ -2,7 +2,11 @@
 
 ![DataWhispers Logo](https://github.com/GermanPaul12/datawhispers/blob/main/assets/logo.png?raw=true)
 
-## Documentation: [![doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://germanpaul12.github.io/datawhispers/) [![Documentation Status](https://readthedocs.org/projects/datawhispers/badge/?version=latest)](https://datawhispers.readthedocs.io/en/latest/?badge=latest) ![PyPI](https://img.shields.io/pypi/v/datawhispers) ![PyPI - Downloads](https://img.shields.io/pypi/dm/datawhispers) [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://datawhispers.streamlit.app/)
+## Documentation: [![doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://germanpaul12.github.io/datawhispers/) [![Documentation Status](https://readthedocs.org/projects/datawhispers/badge/?version=latest)](https://datawhispers.readthedocs.io/en/latest/?badge=latest)
+
+## Pypi: ![PyPI](https://img.shields.io/pypi/v/datawhispers) ![PyPI - Downloads](https://img.shields.io/pypi/dm/datawhispers)
+
+## Streamlit: [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://datawhispers.streamlit.app/)
 
 ### The **DataWhispers** module is used for solving regression and statistical problems
 
