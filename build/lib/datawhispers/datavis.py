@@ -162,3 +162,37 @@ def Analyse(df:pd.DataFrame,Zielvariable:str ,Zielvariable_gut,Zielvariable_schl
     Correlation_analysis_all(df) # Grafiken zu numerischen Korrelationen
     T_Test(df,Zielvariable,Zielvariable_gut,Zielvariable_schlecht) # Numerisch - Kategorischen Korrelationen
     chi_square_all(df,Zielvariable) # Kategorisch - Kategorisch Korrelationen
+    
+def make_scatter_plot(x,y, width:int=8, height:int=6, xlabel:str="", ylabel:str="" ,title:str="", color="gray", filename:str="fig.png"):
+    """Outputs a scatter plot
+    
+    Args:
+        x: array with x-values
+        y: array with y-values
+        xticks (optional): list with values to use as x-ticks
+        yticks (optional): list with values to use as y-ticks
+        xlabel (optional): str with xlabel
+        ylabel (optional): str with ylabel
+        title (optional): str with title
+        color (optional): str or tuple consisting of rgb values for color
+        filename (optional): str with filename or path + filename
+        
+    Returns:
+        Outputs the graph and saves it
+        
+    Raises:
+        None
+    """
+    figure,axes=plt.subplots(figsize=(width,height), ncols=1)
+           
+    axes.set_xlabel(xlabel, );
+
+    axes.set_ylabel(ylabel);
+    axes.title.set_text(title)    
+
+    #plt.xticks(rotation="vertical")
+    axes.scatter(x=x, y=y, color=color,);
+
+    plt.savefig(filename)    
+    
+    
