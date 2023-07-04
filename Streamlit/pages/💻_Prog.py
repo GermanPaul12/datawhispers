@@ -143,10 +143,10 @@ with st.expander("Make Regressions"):
                 name = upload_df.name
                 bytes_data = upload_df.getvalue()
                 data = upload_df.getvalue().decode('utf-8').splitlines()     
-                
+                sep=","
+                st.write(data[0][0])
                 for index in range(len(data)):
-                    sep=","
-                    if data[index][0] == "#":
+                    if "#" in data[index]:
                         data = data[1:]   
                         continue
                     if ";" in data[index]:
@@ -168,10 +168,9 @@ with st.expander("Make Regressions"):
                         name = upload_df2.name
                         bytes_data = upload_df2.getvalue()
                         data = upload_df2.getvalue().decode('utf-8').splitlines()     
-                        
+                        sep=","
                         for index in range(len(data)):
-                            sep=","
-                            if data[index][0] == "#":
+                            if "#" in data[index]:
                                 data = data[1:]   
                                 continue
                             if ";" in data[index]:
@@ -218,20 +217,34 @@ with st.expander("Make Regressions"):
                         #s = buffer.getvalue()
                         #st.text(s)    
                         if st.checkbox("Change advanced Plot settings"):
-                            col1, col2, col3 = st.columns(3)
+                            col1, col2, col3, col4 = st.columns(4)
                             with col1: 
                                 st.write("x-ticks")
                             with col2:    
-                                xticks_start = st.text_input("start (input integer)", 0, key="text_xticks_start", )
+                                xticks_start = st.text_input("start (input integer)", "", key="text_xticks_start", )
                             with col3:    
-                                xticks_end = st.text_input("end (input integer)", 0, key="text_xticks_end", )    
-                            col1, col2, col3 = st.columns(3)
+                                xticks_end = st.text_input("end (input integer)", "", key="text_xticks_end", )    
+                            with col4:    
+                                xticks = st.text_input("number of ticks", 0, key="xticks", )        
+                            col1, col2, col3, col4 = st.columns(4)
                             with col1: 
                                 st.write("y-ticks")
                             with col2:    
-                                yticks_start = st.text_input("start (input integer)", 0, key="text_yticks_start", )
+                                yticks_start = st.text_input("start (input integer)", "", key="text_yticks_start", )
                             with col3:    
-                                yticks_end = st.text_input("end (input integer)", 0, key="text_yticks_end", )    
+                                yticks_end = st.text_input("end (input integer)", "", key="text_yticks_end", )    
+                            with col4:    
+                                yticks = st.text_input("number of ticks", 0, key="yticks", )
+                            col1, col2 = st.columns(2)
+                            with col1: 
+                                st.write("set x-lim")
+                            with col2:    
+                                xlim_left,xlim_right = st.text_input("Left x-limit", "", key="xlim_left", ),st.text_input("Right x-limit", "", key="xlim_right", ) 
+                            col1, col2 = st.columns(2)
+                            with col1: 
+                                st.write("set y-lim")
+                            with col2:    
+                                ylim_left,ylim_right = st.text_input("Lower y-limit", "", key="ylim_left", ),st.text_input("Upper y-limit", "", key="ylim_right", )                       
                             col1, col2, col3 = st.columns(3)      
                             with col1:
                                 xlabel = st.text_input("Input a xlabel", "x", key="xlabel")
@@ -249,8 +262,15 @@ with st.expander("Make Regressions"):
                             ax.scatter(model.x,model.y, color=sc_color);
                             ax.set_xlabel(xlabel) 
                             ax.set_ylabel(ylabel)
-                            if xticks_start and xticks_end: ax.set_xticks([xticks_start, xticks_end]);
-                            if yticks_start and yticks_end: ax.set_yticks([yticks_start, yticks_end]);
+                            ax.set_title(title)
+                            if xticks_start and xticks_end: ax.set_xticks(np.linspace(float(xticks_start), float(xticks_end), int(xticks)));
+                            else: ax.set_xticks(ax.get_xticks())
+                            if yticks_start and yticks_end: ax.set_yticks(np.linspace(float(yticks_start), float(yticks_end), int(yticks)));
+                            else: ax.set_yticks(ax.get_yticks())
+                            if xlim_left and xlim_right: ax.set_xlim(float(xlim_left), float(xlim_right))
+                            else: ax.set_xlim(ax.get_xlim())
+                            if ylim_left and ylim_right: ax.set_ylim(float(ylim_left), float(ylim_right))
+                            else: ax.set_ylim(ax.get_ylim())
                             #plt.savefig(f"{name}");  
                             st.pyplot(fig)
                         else:
