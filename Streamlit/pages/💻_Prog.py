@@ -149,7 +149,7 @@ with st.expander("Make Regressions"):
                     if data[index][0] == "#":
                         data = data[1:]   
                         continue
-                    if ";" in data[index][0]:
+                    if ";" in data[index]:
                         sep=";"
                     data = [data[i].split(sep) for i in range(len(data))]
                     cols,arr=data[0],data[1:]
@@ -174,7 +174,7 @@ with st.expander("Make Regressions"):
                             if data[index][0] == "#":
                                 data = data[1:]   
                                 continue
-                            if ";" in data[index][0]:
+                            if ";" in data[index]:
                                 sep=";"
                             data = [data[i].split(sep) for i in range(len(data))]
                             cols,arr=data[0],data[1:]
