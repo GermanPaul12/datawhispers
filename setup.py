@@ -1,11 +1,21 @@
-from distutils.core import setup
+from distutils.core import setup, find_packages
 from pathlib import Path
+import re
+import ast
+
 this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
+
+_version_re = re.compile(r'__version__\s+=\s+(.*)')
+
+with open('datawhispers/__init__.py', 'rb') as f:
+    hit = _version_re.search(f.read().decode('utf-8')).group(1)
+    version = str(ast.literal_eval(hit))
+
 setup(
   name = 'datawhispers',         # How you named your package folder (MyLib)
-  packages = ["datawhispers"],   # Chose the same as "name"
-  version = '0.2.8.5',      # Start with a small number and increase it with every change you make
+  packages = find_packages(),   # Chose the same as "name"
+  version = version,      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'This is a library to solve regression problems or statistical analysis for the DHBW Mannheim courses Advanced Programming and Data Visualisation',   # Give a short description about your library
   author = 'German Paul',                   # Type in your name
