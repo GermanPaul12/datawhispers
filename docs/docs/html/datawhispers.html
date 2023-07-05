@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>datawhispers package &#8212; DataWhispers 00.00.01 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b3523f8e" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=ce80abac"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="datawhispers" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="datawhispers-package">
+<h1>datawhispers package<a class="headerlink" href="#datawhispers-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-datawhispers.advancedProg">
+<span id="datawhispers-advancedprog-module"></span><h2>datawhispers.advancedProg module<a class="headerlink" href="#module-datawhispers.advancedProg" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.PolyCoefficients">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">PolyCoefficients</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coeffs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#PolyCoefficients"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.PolyCoefficients" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a polynomial for <code class="docutils literal notranslate"><span class="pre">x</span></code> values for the <code class="docutils literal notranslate"><span class="pre">coeffs</span></code> provided.</p>
+<p>The coefficients must be in ascending order (<code class="docutils literal notranslate"><span class="pre">x**0</span></code> to <code class="docutils literal notranslate"><span class="pre">x**o</span></code>).</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.Trend">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">Trend</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansatz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#Trend"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.Trend" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Trends Class. Trend objects have values and method attributes.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.Trend.coef">
+<span class="sig-name descname"><span class="pre">coef</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#Trend.coef"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.Trend.coef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes coefficients of corresponding ansatz</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.Trend.make_easy_plot">
+<span class="sig-name descname"><span class="pre">make_easy_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#Trend.make_easy_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.Trend.make_easy_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows a plot of the data, the regression and saves the plot</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.Trend.pred">
+<span class="sig-name descname"><span class="pre">pred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#Trend.pred"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.Trend.pred" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the predction for input x and the computed corresponding
+coefficients</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.Trend.r2">
+<span class="sig-name descname"><span class="pre">r2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#Trend.r2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.Trend.r2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the coefficient of determination for the training input</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.add_mnist_num_arrays">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">add_mnist_num_arrays</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#add_mnist_num_arrays"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.add_mnist_num_arrays" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the image of the result and saves it as mnist_result.png</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num1</strong> – np.array of length (784,) or (28,28)</p></li>
+<li><p><strong>num2</strong> – np.array of length (784,) or (28,28)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outputs the image</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.expReg">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">expReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#expReg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.expReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time series exponential regression.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.freeReg">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">freeReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansatz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#freeReg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.freeReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Regression with user ansatz. The ansatz is expected to depend on three
+parameters, a, b, and c. The ansatz is expected to be a string with a
+symbolic formulation. for instance: ‘a*arctan(b*x_in+c)’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_in</strong> – Array with x-values</p></li>
+<li><p><strong>y</strong> – Array with y-values</p></li>
+<li><p><strong>ansatz</strong> – <p>“linReg”, “polReg”, “trigReg” or “expReg”</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>coefs</p>
+</dd>
+<dt>Raises:</dt><dd><p>None</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.leastSquares">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">leastSquares</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#leastSquares"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.leastSquares" title="Permalink to this definition">¶</a></dt>
+<dd><p>Solve a nonlinear least-squares problem with bounds on the variables.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> – Function which computes the vector of residuals,</p></li>
+<li><p><strong>fun</strong> (<em>with the signature</em>) – </p></li>
+<li><p><strong>shape</strong> (<em>It must allocate and return a 1-D array_like of</em>) – </p></li>
+<li><p><strong>shape</strong> – </p></li>
+<li><p><strong>residuals</strong> (<em>If the argument x is complex</em><em> or </em><em>the function fun returns complex</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>:param :
+:param it must be wrapped in a real function of real arguments:
+:param as shown at the end of the Examples section.:
+:param x: Array with x-values</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><dl class="simple">
+<dt>ndarray, shape (n,)</dt><dd><p>Solution found.</p>
+</dd>
+<dt>cost: float</dt><dd><p>Value of the cost function at the solution.</p>
+</dd>
+<dt>func: ndarray, shape (m,)</dt><dd><p>Vector of residuals at the solution.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>x</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.linReg">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">linReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#linReg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.linReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time series linear regression. Returns coefs in polynomial descending order.
+Coefs computed analytically.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Args:</dt><dd><p>x_in: Array with x-values
+y: Array with y-values</p>
+</dd>
+<dt>Returns:</dt><dd><p>coefs in descending order</p>
+</dd>
+<dt>Raises:</dt><dd><p>None</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.make_plot">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">make_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_reg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'x'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'y'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['lightblue',</span> <span class="pre">'black']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'fig_reg.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#make_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.make_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outputs a graph for (x and y) and (x and y_reg) and saves it as fig_reg.png</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – array with x-values</p></li>
+<li><p><strong>y</strong> – array with y-values</p></li>
+<li><p><strong>y_reg</strong> – array with regression y_values</p></li>
+<li><p><strong>xticks</strong> (<em>optional</em>) – list with values to use as x-ticks</p></li>
+<li><p><strong>yticks</strong> (<em>optional</em>) – list with values to use as y-ticks</p></li>
+<li><p><strong>xlabel</strong> (<em>optional</em>) – defualt “x”</p></li>
+<li><p><strong>ylabel</strong> (<em>optional</em>) – defualt “y”</p></li>
+<li><p><strong>colors</strong> (<em>optional</em>) – default [“lightblue”, “black”] scatter=lightblue and line=black</p></li>
+<li><p><strong>name</strong> (<em>optional</em>) – default “fig_reg.png”</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outputs the graph and saves it</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.plot_all_regs">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">plot_all_regs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yticks</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#plot_all_regs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.plot_all_regs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the regression of all types and saves them as png</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – array with x-values</p></li>
+<li><p><strong>y</strong> – array with y-values</p></li>
+<li><p><strong>xticks</strong> (<em>optional</em>) – list with values to use as x-ticks</p></li>
+<li><p><strong>yticks</strong> (<em>optional</em>) – list with values to use as y-ticks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outputs the graphs and saves them</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.polReg">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">polReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#polReg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.polReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time series polynomial regression. Returns coefs in polynomial descending order.
+Coefs computed numerically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_in</strong> – Array with x-values</p></li>
+<li><p><strong>y</strong> – Array with y-values</p></li>
+<li><p><strong>deg</strong> – <p>the degree of the polynomial</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><p>coefs in descending order</p>
+</dd>
+<dt>Raises:</dt><dd><p>None</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.predict">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ansatz</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coef</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">freeRegAnsatz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#predict"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.predict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the predction for input x_in and the computed corresponding
+coefficients</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.r2">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">r2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_pred</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#r2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.r2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Coefficient of determination</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.show_mnist_from_array">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">show_mnist_from_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#show_mnist_from_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.show_mnist_from_array" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the image of the mnist number and saves it as mnist_num.png</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>arr</strong> – of size (784,) or (28,28) with values from 0 to 255</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outputs the image</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.show_mnist_from_file">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">show_mnist_from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filepath</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#show_mnist_from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.show_mnist_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the images of the mnist numbers in the file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>filepath</strong> – csv-filepath with lines consisting of values from 0 to 255 with length of 785 or 784</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outputs the images</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.advancedProg.trigReg">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.advancedProg.</span></span><span class="sig-name descname"><span class="pre">trigReg</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_in</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/advancedProg.html#trigReg"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.advancedProg.trigReg" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time seriessine regression. Returns amplitude, frequency and phase</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_in</strong> – Array with x-values</p></li>
+<li><p><strong>y</strong> – Array with y-values</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>amplitude, frequency and phase</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-datawhispers.datavis">
+<span id="datawhispers-datavis-module"></span><h2>datawhispers.datavis module<a class="headerlink" href="#module-datawhispers.datavis" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.Analyse">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">Analyse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable_gut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable_schlecht</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#Analyse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.Analyse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eine rundumanalyse eines Datensatzes in statistischer Form</p>
+<p>Beachte, dass die Zielvariable kategorisch sein sollte, wenn nicht benutzte .map um es einzufügen</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.Correlation_analysis_all">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">Correlation_analysis_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#Correlation_analysis_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.Correlation_analysis_all" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.Correlation_table">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">Correlation_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#Correlation_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.Correlation_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>[numerisch] - [numerisch]</p>
+<p>Stellt die stärksten Korrelationen zwischen intervallskalierten Variablen sortiert visuell dar.</p>
+<p>Größeres p –&gt; Größere Abhängigkeit
+&#64;Variabel df: Zugehöriges DataFrame
+&#64;Variabel max: Maximale Anzahl der Korrelationen</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">DataVisAnalyse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classification_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">good</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bad</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.get_T_Test">
+<span class="sig-name descname"><span class="pre">get_T_Test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.get_T_Test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.get_T_Test" title="Permalink to this definition">¶</a></dt>
+<dd><p>[metrisch] - [kategorisch]</p>
+<p>Stellt die unterschiedlichen stat. Abhängigkeiten mit Mittelwert und Standardabweichung visuell dar
+&#64;self.classification_column: Nur zwei Ausprägungen
+&#64;return [Variable,p-Wert,t-wert,mü-gut, sigma-gut, mü-schlecht, sigma-schlecht]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.get_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.get_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>Eine rundumanalyse eines Datensatzes in statistischer Form</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.get_chi2">
+<span class="sig-name descname"><span class="pre">get_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">varname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.get_chi2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.get_chi2" title="Permalink to this definition">¶</a></dt>
+<dd><p>[kategorisch] - [kategorisch]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.get_corr_table">
+<span class="sig-name descname"><span class="pre">get_corr_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.get_corr_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.get_corr_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>[numerisch] - [numerisch]</p>
+<p>Stellt die stärksten Korrelationen zwischen intervallskalierten Variablen sortiert visuell dar.</p>
+<p>Größeres p –&gt; Größere Abhängigkeit
+&#64;Variabel df: Zugehöriges DataFrame
+&#64;Variabel max: Maximale Anzahl der Korrelationen</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.get_most_relevant">
+<span class="sig-name descname"><span class="pre">get_most_relevant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ignore</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.get_most_relevant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.get_most_relevant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a df with most relevant variables</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ignore</strong> (<em>list</em>) – list with column_names which to ignore</p></li>
+<li><p><strong>n</strong> (<em>int</em>) – features to inspect</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.get_prcnt_diff">
+<span class="sig-name descname"><span class="pre">get_prcnt_diff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.get_prcnt_diff"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.get_prcnt_diff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="datawhispers.datavis.DataVisAnalyse.nice">
+<span class="sig-name descname"><span class="pre">nice</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#DataVisAnalyse.nice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.DataVisAnalyse.nice" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.T_Test">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">T_Test</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable_Wert_gut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable_Wert_schlecht</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#T_Test"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.T_Test" title="Permalink to this definition">¶</a></dt>
+<dd><p>[metrisch] - [kategorisch]</p>
+<p>Stellt die unterschiedlichen stat. Abhängigkeiten mit Mittelwert und Standardabweichung visuell dar
+&#64;Zielvariable: Nur zwei Ausprägungen</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.chi_square_all">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">chi_square_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#chi_square_all"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.chi_square_all" title="Permalink to this definition">¶</a></dt>
+<dd><p>[kategorisch] - [kategorisch]</p>
+<p>Erstellt alle möglichen chi2-Werte und p werte</p>
+<p>p&lt;0.05 und chi2 sehr groß –&gt; Signifikant</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.chi_square_einzeln">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">chi_square_einzeln</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#chi_square_einzeln"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.chi_square_einzeln" title="Permalink to this definition">¶</a></dt>
+<dd><p>[kategorisch] - [kategorisch]</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.chi_square_einzeln_mit_Erwartungswerten">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">chi_square_einzeln_mit_Erwartungswerten</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varname</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Zielvariable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#chi_square_einzeln_mit_Erwartungswerten"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.chi_square_einzeln_mit_Erwartungswerten" title="Permalink to this definition">¶</a></dt>
+<dd><p>[kategorisch] - [kategorisch]</p>
+<p>Mit Tabelle</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="datawhispers.datavis.make_scatter_plot">
+<span class="sig-prename descclassname"><span class="pre">datawhispers.datavis.</span></span><span class="sig-name descname"><span class="pre">make_scatter_plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">width</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">xlabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylabel</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gray'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'fig.png'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/datawhispers/datavis.html#make_scatter_plot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#datawhispers.datavis.make_scatter_plot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outputs a scatter plot</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x</strong> – array with x-values</p></li>
+<li><p><strong>y</strong> – array with y-values</p></li>
+<li><p><strong>xticks</strong> (<em>optional</em>) – list with values to use as x-ticks</p></li>
+<li><p><strong>yticks</strong> (<em>optional</em>) – list with values to use as y-ticks</p></li>
+<li><p><strong>xlabel</strong> (<em>optional</em>) – str with xlabel</p></li>
+<li><p><strong>ylabel</strong> (<em>optional</em>) – str with ylabel</p></li>
+<li><p><strong>title</strong> (<em>optional</em>) – str with title</p></li>
+<li><p><strong>color</strong> (<em>optional</em>) – str or tuple consisting of rgb values for color</p></li>
+<li><p><strong>filename</strong> (<em>optional</em>) – str with filename or path + filename</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outputs the graph and saves it</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-datawhispers.mathFuncs">
+<span id="datawhispers-mathfuncs-module"></span><h2>datawhispers.mathFuncs module<a class="headerlink" href="#module-datawhispers.mathFuncs" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-datawhispers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-datawhispers" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">DataWhispers</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">DataWhispers Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="code_example.html">Code example</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">datawhispers</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">datawhispers package</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">datawhispers</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">datawhispers</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, German Paul.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/datawhispers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
