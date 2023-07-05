@@ -30,7 +30,3 @@ python:
     install:
     - method: pip
     - requirements: requirements.txt
-    
-
-submodules:
-  include: all
