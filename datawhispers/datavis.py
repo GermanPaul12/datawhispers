@@ -374,8 +374,7 @@ class DataVisAnalyse:
     
     
     def get_all(self):
-        """Eine rundumanalyse eines Datensatzes in statistischer Form\n
-        Beachte, dass die Zielvariable kategorisch sein sollte, wenn nicht benutzte .map um es einzufügen
+        """Eine rundumanalyse eines Datensatzes in statistischer Form
         """
         print("                                   --------------------------------------------------")
         print("                                   |                     Analyse                    |")

@@ -5,7 +5,7 @@ from sympy import atan as arctan
 from sympy import sqrt, sin, cos, tan, exp, log, ln
 import matplotlib.pyplot as plt
 a, b, c, x = sym.symbols('a, b, c, x', real=True)
-
+# 
 def linReg(x_in,y):
     '''Time series linear regression. Returns coefs in polynomial descending order.
        Coefs computed analytically.
