@@ -151,6 +151,7 @@ def leastSquares(func,x):
 
         Raises:
             None
+            
     '''
     return least_squares(func,x)
 
