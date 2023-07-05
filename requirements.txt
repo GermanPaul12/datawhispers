@@ -8,5 +8,3 @@ streamlit
 Pillow
 datawhispers
 opencv-python-headless
-sphinx-rtd-theme
-sphinx-autobuild
