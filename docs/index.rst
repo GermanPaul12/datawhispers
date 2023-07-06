@@ -13,6 +13,7 @@ Welcome to DataWhispers's documentation!
    README
    intro
    code_example
+   docs
    modules
 
 Indices and tables
