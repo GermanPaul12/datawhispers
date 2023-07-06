@@ -6,5 +6,4 @@ scipy
 sympy
 streamlit
 Pillow
-datawhispers
 opencv-python-headless
