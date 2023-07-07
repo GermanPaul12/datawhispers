@@ -8,3 +8,4 @@ streamlit
 Pillow
 datawhispers
 opencv-python-headless
+ipython
