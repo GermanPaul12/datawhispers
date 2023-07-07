@@ -120,7 +120,7 @@ def Cor_tab(df,max=10):
     axis.set_ylabel("Pearson Correlation p");
     plt.show()
             
-def Analyse_Tabelle(df:pd.DataFrame,Zielvariable:str,Anzahl_an_gewünschten_Variablen:int=None,Zielvariable_good="",Zielvariable_bad="",Zielvariable_Grenze:int|float=0,kategorische_Variablen=[],Numerische_Variablen=[]):
+def Analyse_Tabelle(df:pd.DataFrame,Zielvariable:str,Anzahl_an_gewünschten_Variablen:int=None,Zielvariable_good="",Zielvariable_bad="",Zielvariable_Grenze:int or float=0,kategorische_Variablen=[],Numerische_Variablen=[]):
     """
     Gibt die Tabelle mit den abhängigsten Variablen aus.
     @param df: Der DataFrame
