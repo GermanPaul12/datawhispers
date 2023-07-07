@@ -5,7 +5,7 @@ from IPython.display import HTML, display
 
 from scipy.stats import chi2_contingency, ttest_ind, pearsonr
 
-def Datensatz_bereinigen(df:pd.DataFrame,kategorische_Spalten:list|tuple=[],numerische_Spalten:list|tuple=[]):
+def Datensatz_bereinigen(df:pd.DataFrame,kategorische_Spalten:list or tuple=[],numerische_Spalten:list or tuple=[]):
     """
     Wandelt 'Numerische Daten' in Kategorische und anders herum.
     @return Bereinigter Datensatz als pd.DataFrame
