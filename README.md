@@ -17,3 +17,5 @@ Solve regression problems (lin, poly, trig, free, least_squares), plot the resul
 Feel free to check out the [Documentation](https://datawhispers.readthedocs.io/en/latest/index.html)
 
 To install just write ```pip install datawhispers``` in your command prompt of choice
+
+Credits: Lauer-Bare, Z., & Wirth, M. (2022). trendPy - Time Series Regression with Python (Version v1.0.1) [Computer software]. https://doi.org/10.5281/zenodo.7009281
